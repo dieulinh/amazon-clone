@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config');
-
+const cors = require('cors');
 const app = express();
 
 
@@ -18,6 +18,7 @@ mongoose.connect(config.database, error => {
   }
 });
 app.use(morgan('dev'));
+app.use(cors());
 const port = 8080;
 app.get('/', (req, res) => {
   res.status(200);
