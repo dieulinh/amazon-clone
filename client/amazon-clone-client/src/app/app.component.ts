@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  isCollapsed = true;
+  searchTerm = '';
+
+  get token() {
+    return localStorage.getItem('token');
+  }
+
+  collapse() {
+    this.isCollapsed = true;
+  }
+
+  closeDropDown(dropdown) {
+    dropdown.close();
+  }
+
+  logout() {}
+
+  search() {}
 }
