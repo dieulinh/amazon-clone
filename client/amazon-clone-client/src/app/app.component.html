@@ -22,6 +22,25 @@
               <i class="fa fa-user mr-1"></i>
               <span *ngIf="!token">Account</span>
             </a>
+            <div ngbDropdownMenu class="dropdown-menu">
+              <a *ngIf="token" (click)="closeDropdown(); collapse();" routerLink="/profile" class="dropdown-item">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
+              </a>
+              <a *ngIf="!token" (click)="closeDropdown(); collapse();" routerLink="/login" class="dropdown-item">
+                <i class="fa fa-key" aria-hidden="true"></i> Login
+              </a>
+              <a *ngIf="token" (click)="closeDropdown(); collapse();logout();" routerLink="/logout" class="dropdown-item">
+                <i class="fa fa-key" aria-hidden="true"></i>
+              </a>
+              <a *ngIf="!token" (click)="closeDropdown(); collapse();" routerLink="/register" class="dropdown-item">
+                <i class="fa fa-group" aria-hidden="true"></i> Register
+              </a>
+            </div>
+          </li>
+          <li class="nav-item ml-0 ml-md-2">
+             <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
+               <i class="fa fa-shopping-cart mr-1"></i>
+             </a>
           </li>
         </ul>
       </div>
@@ -30,3 +49,8 @@
 </nav>
 
 <router-outlet></router-outlet>
+<footer id="main-footer" class="bg-main text-white mt-5 p-5">
+  <div class="container">
+    <p class="lead text-center">Copyright &copy; 2018 Amazon-clone</p>
+  </div>
+</footer>
