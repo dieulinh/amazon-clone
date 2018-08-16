@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,8 @@ export class AppComponent {
   title = 'app';
   isCollapsed = true;
   searchTerm = '';
+
+  constructor(private router: Router, private data: DataService) {}
 
   get token() {
     return localStorage.getItem('token');
@@ -22,7 +26,10 @@ export class AppComponent {
     dropdown.close();
   }
 
-  logout() {}
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['']);
+  }
 
   search() {}
 }

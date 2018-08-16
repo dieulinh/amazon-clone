@@ -10,7 +10,8 @@ const Account = require('./routers/account');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(Account);
+app.use('/api/accounts', Account);
+
 // Connect database
 mongoose.connect(config.database, { useNewUrlParser: true } , error => {
   if (error) {
