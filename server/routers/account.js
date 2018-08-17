@@ -2,9 +2,10 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const config = require('../config/config');
+const checkJWT = require('../middlewares/check-jwt');
 
 router.post('/login', function(req, res, next) {
-  console.log(req);
+
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
       res.json({
@@ -62,4 +63,37 @@ router.post('/signup', function(req, res, next) {
     }
   });
 });
+
+router.route('/profile')
+  .get(checkJWT, (req, res, next) => {
+    User.findOne({ _id: req.decoded.user._id }, (err, user) => {
+      if (err) {
+        res.json({
+          success: false,
+          message: 'User not found'
+        });
+      } else {
+        res.json({
+          success: true,
+          user: user,
+          message: 'User found'
+        });
+      }
+    });
+  })
+  .post(checkJWT, (req, res, next) => {
+    User.findOne({ _id: req.decoded.user._id}, (err, user) => {
+      if (err) { next(err); }
+      if (req.body.name) { user.name = req.body.name; }
+      if (req.body.email) { user.email = req.body.email; }
+      if (req.body.password) { user.password = req.body.password; }
+      user.isSeller = req.body.isSeller;
+      user.save();
+      res.json({
+        success: true,
+        message: 'Profile updated successfully'
+      });
+    });
+  });
+
 module.exports  = router;

@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { HomeComponent } from './home/home.component';
 import { MessageComponent } from './message/message.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
 
 import { RestApiService } from './rest-api.service';
 import { DataService } from './data.service';
-import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [RestApiService, DataService],
+  providers: [RestApiService, DataService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
