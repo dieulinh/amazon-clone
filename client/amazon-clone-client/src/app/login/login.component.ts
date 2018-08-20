@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         if (data['success']) {
           localStorage.setItem('token', data['token']);
           this.data.success(data['message']);
+          await this.data.getProfile();
           this.router.navigate(['/']);
         } else {
           this.data.error(data['message']);

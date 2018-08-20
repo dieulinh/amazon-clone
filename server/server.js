@@ -6,11 +6,13 @@ const config = require('./config/config');
 const cors = require('cors');
 const app = express();
 
-const Account = require('./routers/account');
+const AccountRoutes = require('./routers/account');
+const CategoryRoutes = require('./routers/main');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/api/accounts', Account);
+app.use('/api/accounts', AccountRoutes);
+app.use('/api', CategoryRoutes);
 
 // Connect database
 mongoose.connect(config.database, { useNewUrlParser: true } , error => {
