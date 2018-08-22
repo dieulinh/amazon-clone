@@ -8,11 +8,13 @@ const app = express();
 
 const AccountRoutes = require('./routers/account');
 const CategoryRoutes = require('./routers/main');
+const ProductRoutes = require('./routers/product');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/accounts', AccountRoutes);
 app.use('/api', CategoryRoutes);
+app.use('/api/product', ProductRoutes);
 
 // Connect database
 mongoose.connect(config.database, { useNewUrlParser: true } , error => {
